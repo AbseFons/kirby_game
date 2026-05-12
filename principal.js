@@ -24,8 +24,8 @@ var estadoPrincipal = {
         fondoJuego.tileScale.setTo(800/1920, 450/1080);
         
         // 2. Agregamos el sonido y lo reproducimos en bucle
-        musicaFondo = juego.add.audio('sonido_fondo');
-        musicaFondo.loopFull(0.5); // El 0.5 es el volumen (50%). Puedes ajustarlo a 1.
+        // musicaFondo = juego.add.audio('sonido_fondo');
+        // musicaFondo.loopFull(0.5); // El 0.5 es el volumen (50%). Puedes ajustarlo a 1.
 
         batamon = juego.add.sprite(100, 335, 'batamon'); 
         batamon.scale.setTo(3, 3);
