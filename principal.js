@@ -33,7 +33,7 @@ var estadoPrincipal = {
     update: function(){
         fondoJuego.tilePosition.x -= 3; 
         
-        var velocidad = 5; 
+        var velocidad = 10; 
         
         if(teclaDerecha.isDown){
             batamon.x += velocidad;
