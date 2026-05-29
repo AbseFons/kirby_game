@@ -5,37 +5,31 @@ var teclaArriba;
 var teclaAbajo;
 var teclaDerecha;
 var teclaIzquierda;
-var musicaFondo; // Variable para el sonido
+var musicaFondo; 
 
 var estadoPrincipal = {
     preload: function(){
         juego.load.image('fondo', 'img/fondo_kirby.png');
         juego.load.spritesheet('batamon', 'img/kirby.png', 18, 17); 
-        
-        // 1. Cargamos el sonido de fondo
         juego.load.audio('sonido_fondo', 'img/fondo_sound.mp3');
     },
     
     create: function(){
-        // Iniciamos el sistema de físicas de Phaser (necesario para la gravedad y el salto)
         juego.physics.startSystem(Phaser.Physics.ARCADE);
 
         fondoJuego = juego.add.tileSprite(0, 0, 800, 450, 'fondo');
         fondoJuego.tileScale.setTo(800/1920, 450/1080);
         
-        // 2. Agregamos el sonido y lo reproducimos en bucle
         musicaFondo = juego.add.audio('sonido_fondo');
-        musicaFondo.loopFull(1); // El 0.5 es el volumen (50%). Puedes ajustarlo a 1.
+        musicaFondo.loopFull(1); 
 
         batamon = juego.add.sprite(100, 335, 'batamon'); 
         batamon.scale.setTo(3, 3);
-        // Centramos el ancla para que al voltear el sprite (si decides hacerlo después) no se descuadre
         batamon.anchor.setTo(0.5, 0.5); 
         
-        // Habilitamos las físicas para nuestro personaje
         juego.physics.arcade.enable(batamon);
-        batamon.body.gravity.y = 800; // Gravedad que tira del personaje hacia abajo
-        batamon.body.collideWorldBounds = true; // Evita que caiga fuera del canvas
+        batamon.body.gravity.y = 800; 
+        batamon.body.collideWorldBounds = true; 
         
         batamon.animations.add('caminar', [0, 1, 2, 3], 10, true);
 
@@ -48,35 +42,35 @@ var estadoPrincipal = {
     update: function(){
         fondoJuego.tilePosition.x -= 3; 
         
-        // Reiniciamos la velocidad horizontal en cada frame para que se detenga al soltar la tecla
         batamon.body.velocity.x = 0; 
-        
         var velocidadHorizontal = 250; 
         
-        // 3. Lógica de movimiento horizontal y Animación
+        var alturaSuelo = 360; 
+        
+        if (batamon.y >= alturaSuelo) {
+            batamon.y = alturaSuelo;
+            batamon.body.velocity.y = 0; 
+        }
+
+
         if(teclaDerecha.isDown){
             batamon.body.velocity.x = velocidadHorizontal;
             batamon.animations.play('caminar');
-            batamon.scale.x = 3; // Mira a la derecha
+            batamon.scale.x = 3; 
         } else if(teclaIzquierda.isDown){
             batamon.body.velocity.x = -velocidadHorizontal;
             batamon.animations.play('caminar');
-            batamon.scale.x = -3; // Invierte el sprite para mirar a la izquierda
+            batamon.scale.x = -3; 
         } else {
-            // Si no se presiona ni izquierda ni derecha: detenerse y mostrar el frame 2
             batamon.animations.stop();
             batamon.frame = 1;
         }
 
-        // 4. Lógica del salto (Arriba)
-        // Solo salta si la tecla está presionada Y está tocando el suelo (evita saltos infinitos en el aire)
-        if(teclaArriba.isDown && batamon.body.onFloor()){
-            batamon.body.velocity.y = -400; // Fuerza del salto (negativo es hacia arriba)
+        if(teclaArriba.isDown && batamon.y >= alturaSuelo){
+            batamon.body.velocity.y = -400; 
         } 
         
-        // 5. Lógica de agacharse (Abajo)
         if(teclaAbajo.isDown){
-            // Por ahora vacío. Aquí irá la lógica para cambiar el hitbox o el frame al agacharse.
         }
     }
 }
