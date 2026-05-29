@@ -65,7 +65,7 @@ var estadoPrincipal = {
         } else {
             // Si no se presiona ni izquierda ni derecha: detenerse y mostrar el frame 2
             batamon.animations.stop();
-            batamon.frame = 2;
+            batamon.frame = 1;
         }
 
         // 4. Lógica del salto (Arriba)
