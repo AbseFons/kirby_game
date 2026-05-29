@@ -3,11 +3,50 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Juegos Prueba 2</title>
+        <title>Juegos</title>
         <script src="phaser.js"></script>
         <script src="principal.js"></script>
+        
+        <style>
+            /* Configuramos el cuerpo de la página para ocupar toda la pantalla */
+            body {
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center; /* Centra verticalmente */
+                align-items: center;     /* Centra horizontalmente */
+                background-color: #2c3e50; /* Color de fondo oscuro para resaltar el juego */
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            /* Estilos opcionales para el contenedor del juego (ej. una sombra) */
+            #bloque_juego {
+                box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.5);
+                border-radius: 8px; /* Bordes ligeramente redondeados en el canvas */
+                overflow: hidden;
+            }
+
+            /* Estilos para el footer */
+            footer {
+                margin-top: 25px;
+                color: #ecf0f1;
+                font-size: 16px;
+                letter-spacing: 1px;
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
+        
+        <!-- Contenedor donde Phaser inyectará el canvas -->
         <div id="bloque_juego"></div>
+
+        <!-- Footer con tu información -->
+        <footer>
+            Abner Fonseca Melgarejo - UTP
+        </footer>
+
     </body>
 </html>
