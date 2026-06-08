@@ -6,6 +6,7 @@ var teclaAbajo;
 var teclaDerecha;
 var teclaIzquierda;
 var musicaFondo; 
+var musicaIniciada = false;
 
 var estadoPrincipal = {
     preload: function(){
@@ -21,7 +22,15 @@ var estadoPrincipal = {
         fondoJuego.tileScale.setTo(800/1920, 450/1080);
         
         musicaFondo = juego.add.audio('sonido_fondo');
-        musicaFondo.loopFull(1); 
+        musicaFondo.loop = true;
+
+        // La música empezará con el primer clic o toque en la pantalla
+        juego.input.onDown.add(function(){
+            if (!musicaIniciada) {
+                musicaFondo.play('', 0, 1, true);
+                musicaIniciada = true;
+            }
+        }, this);
 
         batamon = juego.add.sprite(100, 335, 'batamon'); 
         batamon.scale.setTo(3, 3);
@@ -52,7 +61,6 @@ var estadoPrincipal = {
             batamon.body.velocity.y = 0; 
         }
 
-
         if(teclaDerecha.isDown){
             batamon.body.velocity.x = velocidadHorizontal;
             batamon.animations.play('caminar');
@@ -69,9 +77,6 @@ var estadoPrincipal = {
         if(teclaArriba.isDown && batamon.y >= alturaSuelo){
             batamon.body.velocity.y = -400; 
         } 
-        
-        if(teclaAbajo.isDown){
-        }
     }
 }
 
